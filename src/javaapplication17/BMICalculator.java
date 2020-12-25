@@ -101,6 +101,19 @@ public class BMICalculator extends JFrame {
        JButton clear = new JButton("Clear");
        clear.setBounds(170,293,85,30);
        c.add(clear);
+       
+        //Clear Button ActionListener
+
+          clear.addActionListener(new ActionListener(){
+            public void actionPerformed ( ActionEvent e){
+
+         bmitext.setText("");
+         conditiontext.setText(""); 
+         
+         bmitext.setEnabled(false);
+        conditiontext.setEnabled(false);
+    }
+    });
         
        //Home button
         JButton home = new JButton("Home");
@@ -120,8 +133,7 @@ public void actionPerformed(ActionEvent e){
             try {
                 double weight = Double.parseDouble(txtKg.getText());
                 if (weight <= 0) {
-                    JOptionPane.showMessageDialog(c, "Weight should be greater than 0(Seriously Do you weight " +
-                            "negavtive?)");
+                    JOptionPane.showMessageDialog(c, "Weight should be greater than Zero");
                     txtKg.setText("");
                     txtKg.requestFocus();
                 }
@@ -144,13 +156,31 @@ public void actionPerformed(ActionEvent e){
 
                     double bmi = weight / (height * height);
                     bmi = bmi * 10000;
-
-
+                    bmitext.setText(String.valueOf(bmi));
+   
                     String msg;
-                    if (bmi < 18.5) msg = "You are underweight";
-                    else if (bmi >= 18.5 & bmi < 25) msg = "  Congratulations! .You are normal. Keep up the good work!";
-                    else if (bmi >= 25 && bmi < 30) msg = "You are overweight";
-                    else msg = "You are Obese";
+                    if (bmi < 18.5) 
+                    {
+                        msg = "You are underweight";
+                        conditiontext.setText(msg);
+                    } 
+                    
+                    else if (bmi >= 18.5 & bmi < 25) 
+                    {
+                     msg = "Congratulations!.You are normal.";
+                      conditiontext.setText(msg);
+                    }
+                       
+                    else if (bmi >= 25 && bmi < 30)
+                    {
+                    msg = "You are overweight";
+                     conditiontext.setText(msg);
+                    } 
+                    else{
+                     msg = "You are Obese";
+                      conditiontext.setText(msg);
+                    }
+                       
 
 
                     NumberFormat nf = NumberFormat.getInstance();
@@ -158,11 +188,13 @@ public void actionPerformed(ActionEvent e){
                     String bmis = nf.format(bmi);
 
 
-                    JOptionPane.showMessageDialog(c, "BMI=" + bmis + msg);
+                  //  JOptionPane.showMessageDialog(c, "BMI=" + bmis + msg);
                     txtKg.setText("");
                     cbFt.setSelectedItem("1");
                     cbln.setSelectedItem("0");
-
+                  
+                    bmitext.setEnabled(true);
+                    conditiontext.setEnabled(true);
 
                 }
             }
