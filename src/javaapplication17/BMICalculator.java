@@ -53,7 +53,7 @@ public class BMICalculator extends JFrame {
         c.add(weight);
        
     //user input weight
-   JTextField txtKg = new JTextField("Kg");
+   JTextField txtKg = new JTextField();
        txtKg.setBounds(170,73, 195, 30);
        c.add(txtKg);
     
